@@ -1,64 +1,74 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "OASIS - Free Games Portal";
 }
 
-<div class="text-center mb-5">
-    <h1 class="display-4 fw-bold text-primary">The .NET Solution Stack</h1>
-    <p class="lead text-muted">Powering Group 6's Phase 1 Technical Implementation</p>
+<div class="text-center my-5 py-4">
+    <h1 class="display-3 fw-bold text-gradient tracking-tight">Welcome to the OASIS</h1>
+    <p class="lead text-muted fs-4 mx-auto" style="max-width: 700px;">
+        A clean, fast web portal designed to help you discover free video games.
+    </p>
+    <div class="mt-4">
+        <a asp-page="/GameToFree" class="btn btn-primary btn-lg px-4 py-2 fw-semibold">Find a Random Game</a>
+    </div>
 </div>
 
-<div class="row g-4">
+<div class="row g-4 mt-2">
     <div class="col-lg-6">
         <div class="main-container h-100">
-            <h2 class="h4 mb-3 border-bottom pb-2">Why .NET?</h2>
+            <h2 class="h4 mb-3 border-bottom pb-2 text-primary">Why We Chose .NET</h2>
             <p>
-                Our group decided to choose the .NET stack due to the balance of performance, security, and long-term maintainability. 
-                Since .NET uses C# across much of the development process, it allows us to work more efficiently without having to switch between multiple languages or frameworks. 
-                In addition, .NET integrates well with Microsoft Azure and other enterprise tools, which can simplify deployment and cloud management. 
-                Its built-in security features and large developer community also make it a reliable choice for creating scalable and professional applications.
+                Our team chose Microsoft's <strong>.NET web stack</strong> because it is fast, secure, and highly stable. In our past projects, we used JavaScript setups, but switching to .NET and C# helps us build cleaner code that catches errors before the website even runs.
             </p>
-            <ul class="list-unstyled mt-3">
-                <li><i class="bi bi-check-circle-fill text-success"></i> <strong></strong> </li>
-                <li><i class="bi bi-check-circle-fill text-success"></i> <strong></strong> </li>
-                <li><i class="bi bi-check-circle-fill text-success"></i> <strong></strong> </li>
-            </ul>
+            <p>
+                Using C# for the entire backend allows our web application to handle data quickly and smoothly, ensuring the pages load without any delay or lag for the user.
+            </p>
+
+            <h3 class="h6 mt-4 mb-2 text-uppercase font-weight-bold text-muted small">System Layout</h3>
+            <table class="table table-sm mt-2 table-borderless">
+                <tbody>
+                    <tr class="border-bottom">
+                        <td style="width: 35%;" class="fw-bold">Frontend (Visuals)</td>
+                        <td class="text-secondary">Razor Pages Engine, Bootstrap 5, and our custom OASIS color theme</td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td class="fw-bold">Backend (Logic)</td>
+                        <td class="text-secondary">C# code running on an embedded Kestrel web server pipeline</td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td class="fw-bold">Core Engine</td>
+                        <td class="text-secondary">Cross-Platform .NET 8 Runtime environment</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
     <div class="col-lg-6">
         <div class="main-container h-100">
-            <h2 class="h4 mb-3 border-bottom pb-2">Technical Core</h2>
-            <p>For Phase 1, our implementation focuses on the frontend and routing capabilities of the stack:</p>
-            <table class="table table-sm mt-2">
-                <thead>
-                    <tr>
-                        <th>Layer</th>
-                        <th>Technology</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Frontend</strong></td>
-                        <td>Razor Pages, Bootstrap, CSS</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p>For Phase 2, our implementation focuses on an API that will go with the theme of what our website will be about. 
-                We choose a free to play game to go with the origins of the group OASIS.
+            <h2 class="h4 mb-3 border-bottom pb-2 text-primary">Live API Data</h2>
+            <p>
+                For Phase 2, we updated our website to pull live content from a third-party service. To match our gaming theme, <strong>OASIS</strong>, we connected the application to the free <strong>FreeToGame API database</strong>.
             </p>
-            <table class="table table-sm mt-2">
-                <thead>
-                    <tr>
-                        <th>
-                            API
-                        </th>
-                    </tr>
-                </thead>
+            <p>
+                Instead of using basic browser scripts, our backend code securely requests information directly from the gaming database. It safely reads the incoming data, translates it into memory, and instantly updates the template with a fresh game picture and description.
+            </p>
+
+            <h3 class="h6 mt-4 mb-2 text-uppercase font-weight-bold text-muted small">How It Works</h3>
+            <table class="table table-sm mt-2 table-borderless">
                 <tbody>
-                    <tr>
-                        <tb>Free to play Games</tb>
+                    <tr class="border-bottom">
+                        <td style="width: 35%;" class="fw-bold">Data Fetching</td>
+                        <td class="text-secondary">Uses <code>HttpClient</code> to grab live data from the web</td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td class="fw-bold">Data Parsing</td>
+                        <td class="text-secondary">Uses <code>System.Text.Json</code> to instantly read and map the game info</td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td class="fw-bold">Page Controls</td>
+                        <td class="text-secondary">Uses server-side handlers (<code>OnGetAsync</code> / <code>OnPostAsync</code>) to load the text</td>
                     </tr>
                 </tbody>
             </table>
