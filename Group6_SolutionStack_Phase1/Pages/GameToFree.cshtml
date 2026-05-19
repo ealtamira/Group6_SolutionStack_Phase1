@@ -1,0 +1,61 @@
+﻿@page
+@model Group6_SolutionStack_Phase1.Pages.GameToFreeModel
+@{
+    ViewData["Title"] = "Random Free Game";
+}
+
+<form method="post">
+    <button type="submit" class="randomButton">
+        Reload Random Game
+    </button>
+</form>
+
+@if (Model.CurrentGame != null)
+{
+    <div class="gameContainer">
+
+        <div class="imageContainer">
+            <img src="@Model.CurrentGame.thumbnail"
+                 alt="@Model.CurrentGame.title" />
+        </div>
+
+        <div class="infoContainer">
+            <h1>@Model.CurrentGame.title</h1>
+
+            <p>
+                <strong>Status:</strong>
+                @Model.CurrentGame.status
+            </p>
+
+            <p>
+                <strong>Genre:</strong>
+                @Model.CurrentGame.genre
+            </p>
+
+            <p>
+                <strong>Platform:</strong>
+                @Model.CurrentGame.platform
+            </p>
+
+            <p>
+                <strong>Publisher:</strong>
+                @Model.CurrentGame.publisher
+            </p>
+
+            <p>
+                <strong>Developer:</strong>
+                @Model.CurrentGame.developer
+            </p>
+
+            <p>
+                <strong>Release Date:</strong>
+                @Model.CurrentGame.release_date
+            </p>
+
+            <p>
+                @Model.CurrentGame.short_description
+            </p>
+        </div>
+
+    </div>
+}
