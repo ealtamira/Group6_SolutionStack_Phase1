@@ -1,4 +1,7 @@
+using System;
+using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -6,7 +9,8 @@ namespace Group6_SolutionStack_Phase1.Pages
 {
     public class GameToFreeModel : PageModel
     {
-        public Game CurrentGame { get; set; }
+        [BindProperty]
+        public Game? CurrentGame { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -18,29 +22,58 @@ namespace Group6_SolutionStack_Phase1.Pages
             await LoadRandomGame();
         }
 
+        public IActionResult OnPostSave()
+        {
+            if (CurrentGame == null || string.IsNullOrEmpty(CurrentGame.title))
+            {
+                return Page();
+            }
+
+            try
+            {
+                var controller = new Group6_SolutionStack_Phase1.Controllers.LibraryController();
+                string jsonString = JsonSerializer.Serialize(CurrentGame);
+                using (JsonDocument doc = JsonDocument.Parse(jsonString))
+                {
+                    JsonElement rawJson = doc.RootElement.Clone();
+                    var response = controller.Save(rawJson);
+                    if (response is OkObjectResult || response is CreatedAtActionResult)
+                    {
+                        return RedirectToPage("/Library");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error during API controller save invocation: {ex.Message}");
+            }
+            return Page();
+        }
+
         private async Task LoadRandomGame()
         {
             Random rnd = new Random();
-
             int randomId = rnd.Next(1, 101);
-
-            HttpClient client = new HttpClient
+            using (HttpClient client = new HttpClient { BaseAddress = new Uri("https://www.freetogame.com/api/") })
             {
-                BaseAddress = new Uri("https://www.freetogame.com/api/")
-            };
+                var response = await client.GetAsync($"game?id={randomId}");
 
-            var response = await client.GetAsync($"game?id={randomId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonData = await response.Content.ReadAsStringAsync();
 
-            if (response.IsSuccessStatusCode)
-            {
-                string jsonData = await response.Content.ReadAsStringAsync();
+                    var parsedGame = JsonSerializer.Deserialize<Game>(
+                        jsonData,
+                        new JsonSerializerOptions
+                        {
+                            PropertyNameCaseInsensitive = true
+                        });
 
-                CurrentGame = JsonSerializer.Deserialize<Game>(
-                    jsonData,
-                    new JsonSerializerOptions
+                    if (parsedGame != null)
                     {
-                        PropertyNameCaseInsensitive = true
-                    });
+                        CurrentGame = parsedGame;
+                    }
+                }
             }
         }
     }

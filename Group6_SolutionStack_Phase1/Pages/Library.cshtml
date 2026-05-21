@@ -1,0 +1,46 @@
+﻿@page
+@model Group6_SolutionStack_Phase1.Pages.LibraryModel
+@{
+    ViewData["Title"] = "My Saved Matrix Library";
+}
+
+<div class="main-container">
+    <h1 class="text-gradient border-bottom pb-2 mb-4">OASIS Saved Library</h1>
+    <p class="text-muted">This library data is managed entirely through your custom backend API endpoints.</p>
+
+    @if (Model.SavedLibrary == null || !Model.SavedLibrary.Any())
+    {
+        <div class="alert alert-secondary text-center py-4">
+            <h5>Your library is currently empty.</h5>
+            <p class="mb-0 small text-muted">Go to the Random Game page and click save to fill it up!</p>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var game in Model.SavedLibrary)
+            {
+                <div class="col-md-4">
+                    <div class="team-card p-3 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            @if (!string.IsNullOrEmpty(game.thumbnail))
+                            {
+                                <img src="@game.thumbnail" alt="@game.title" class="img-fluid rounded mb-2" />
+                            }
+                            <h4 class="h5 mb-1 text-primary">@game.title</h4>
+                            <span class="badge bg-dark mb-2">@game.genre</span>
+                            <p class="small text-muted mb-2">Platform: @game.platform</p>
+                            <p class="small text-secondary">@game.short_description</p>
+                        </div>
+
+                        <form method="post" asp-page-handler="Delete" asp-route-id="@game.id" class="mt-3">
+                            <button type="submit" class="btn btn-danger btn-sm w-100" onclick="return confirm('Remove from your library?');">
+                                Delete Record
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -22,39 +22,30 @@
         <div class="infoContainer">
             <h1>@Model.CurrentGame.title</h1>
 
-            <p>
-                <strong>Status:</strong>
-                @Model.CurrentGame.status
-            </p>
+            <p><strong>Status:</strong> @Model.CurrentGame.status</p>
+            <p><strong>Genre:</strong> @Model.CurrentGame.genre</p>
+            <p><strong>Platform:</strong> @Model.CurrentGame.platform</p>
+            <p><strong>Publisher:</strong> @Model.CurrentGame.publisher</p>
+            <p><strong>Developer:</strong> @Model.CurrentGame.developer</p>
+            <p><strong>Release Date:</strong> @Model.CurrentGame.release_date</p>
+            <p>@Model.CurrentGame.short_description</p>
 
-            <p>
-                <strong>Genre:</strong>
-                @Model.CurrentGame.genre
-            </p>
+            <form method="post" asp-page-handler="Save" class="mt-4">
+                <input type="hidden" asp-for="CurrentGame.id" />
+                <input type="hidden" asp-for="CurrentGame.title" />
+                <input type="hidden" asp-for="CurrentGame.thumbnail" />
+                <input type="hidden" asp-for="CurrentGame.status" />
+                <input type="hidden" asp-for="CurrentGame.genre" />
+                <input type="hidden" asp-for="CurrentGame.platform" />
+                <input type="hidden" asp-for="CurrentGame.publisher" />
+                <input type="hidden" asp-for="CurrentGame.developer" />
+                <input type="hidden" asp-for="CurrentGame.release_date" />
+                <input type="hidden" asp-for="CurrentGame.short_description" />
 
-            <p>
-                <strong>Platform:</strong>
-                @Model.CurrentGame.platform
-            </p>
-
-            <p>
-                <strong>Publisher:</strong>
-                @Model.CurrentGame.publisher
-            </p>
-
-            <p>
-                <strong>Developer:</strong>
-                @Model.CurrentGame.developer
-            </p>
-
-            <p>
-                <strong>Release Date:</strong>
-                @Model.CurrentGame.release_date
-            </p>
-
-            <p>
-                @Model.CurrentGame.short_description
-            </p>
+                <button type="submit" class="btn btn-success btn-lg w-100 fw-semibold shadow-sm">
+                    Save Game to My Library
+                </button>
+            </form>
         </div>
 
     </div>
