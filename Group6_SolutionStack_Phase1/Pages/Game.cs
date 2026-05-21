@@ -15,5 +15,6 @@
         public string? developer { get; set; }
         public string? release_date { get; set; }
         public string? freetogame_profile_url { get; set; }
+        public bool is_favorate_game { get; set; } = false;
     }
 }

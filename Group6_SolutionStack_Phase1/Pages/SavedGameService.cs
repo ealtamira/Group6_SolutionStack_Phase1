@@ -32,5 +32,14 @@ namespace Group6_SolutionStack_Phase1
             if (game == null) return false;
             return _savedGames.Remove(game);
         }
+        public static void FavorateGame(int id)
+        {
+            var game = GetSavedById(id);
+
+            if (game != null)
+            {
+                game.is_favorate_game = !game.is_favorate_game;
+            }
+        }
     }
 }

@@ -18,5 +18,10 @@ namespace Group6_SolutionStack_Phase1.Pages
             SavedGameService.RemoveGame(id);
             return RedirectToPage("/Library");
         }
+        public IActionResult OnPostUpdate(int id)
+        {
+            SavedGameService.FavorateGame(id);
+            return RedirectToPage("/Library");
+        }
     }
 }
