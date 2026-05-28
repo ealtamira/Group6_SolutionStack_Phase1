@@ -74,4 +74,81 @@
             </table>
         </div>
     </div>
+    <div class="col-lg-6">
+        <div class="main-container h-100">
+            <h2 class="h4 mb-3 border-bottom pb-2 text-primary">Phase 3: CRUD Library System</h2>
+
+            <p>
+                In Phase 3, we introduced full CRUD functionality to allow users to manage their own saved game library.
+                This turned the application from a simple viewer into an interactive system where users can create, read,
+                update, and delete games from their personal collection.
+            </p>
+
+            <p>
+                Instead of only displaying data from the FreeToGame API, we added a local storage layer that allows users
+                to save games they like, mark favorites, and remove games from their library.
+            </p>
+
+            <h3 class="h6 mt-4 mb-2 text-uppercase font-weight-bold text-muted small">CRUD Features</h3>
+
+            <table class="table table-sm mt-2 table-borderless">
+                <tbody>
+                    <tr class="border-bottom">
+                        <td style="width: 35%;" class="fw-bold">Create</td>
+                        <td class="text-secondary">Users can save games from the API into their personal library</td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td class="fw-bold">Read</td>
+                        <td class="text-secondary">Saved games are displayed in the Library page using a shared service</td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td class="fw-bold">Update</td>
+                        <td class="text-secondary">Users can toggle favorite status for saved games</td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td class="fw-bold">Delete</td>
+                        <td class="text-secondary">Users can remove games from their library permanently</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="main-container h-100">
+            <h2 class="h4 mb-3 border-bottom pb-2 text-primary">Phase 4: SQL Database Integration</h2>
+
+            <p>
+                In Phase 4, we upgraded our CRUD system from in-memory storage to a persistent SQL database.
+                This ensures that user data is saved permanently and remains available even after the application is closed.
+            </p>
+
+            <p>
+                We implemented a Data Access Layer (DAL) using Entity Framework 6 to separate database logic from the
+                application UI and API controllers. This improved structure, maintainability, and scalability of the project.
+            </p>
+
+            <h3 class="h6 mt-4 mb-2 text-uppercase font-weight-bold text-muted small">Database Architecture</h3>
+
+            <table class="table table-sm mt-2 table-borderless">
+                <tbody>
+                    <tr class="border-bottom">
+                        <td style="width: 35%;" class="fw-bold">Database Engine</td>
+                        <td class="text-secondary">Microsoft SQL Server (Localhost / LocalDB)</td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td class="fw-bold">ORM</td>
+                        <td class="text-secondary">Entity Framework 6 for object-relational mapping</td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td class="fw-bold">Data Layer</td>
+                        <td class="text-secondary">Custom DAL handles all Create, Read, Update, Delete operations</td>
+                    </tr>
+                    <tr class="border-bottom">
+                        <td class="fw-bold">Persistence</td>
+                        <td class="text-secondary">Games are stored permanently in a SQL database instead of memory</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

@@ -23,19 +23,19 @@
                 <div class="col-md-4">
                     <div class="team-card p-3 h-100 d-flex flex-column justify-content-between">
                         <div>
-                            @if (!string.IsNullOrEmpty(game.thumbnail))
+                            @if (!string.IsNullOrEmpty(game.Thumbnail))
                             {
-                                <img src="@game.thumbnail" alt="@game.title" class="img-fluid rounded mb-2" />
+                                <img src="@game.Thumbnail" alt="@game.Title" class="img-fluid rounded mb-2" />
                             }
-                            <h4 class="h5 mb-1 text-primary">@game.title</h4>
-                            <span class="badge bg-dark mb-2">@game.genre</span>
-                            <p class="small text-muted mb-2">Platform: @game.platform</p>
-                            <p class="small text-secondary">@game.short_description</p>
+                            <h4 class="h5 mb-1 text-primary">@game.Title</h4>
+                            <span class="badge bg-dark mb-2">@game.Genre</span>
+                            <p class="small text-muted mb-2">Platform: @game.Platform</p>
+                            <p class="small text-secondary">@game.ShortDescription</p>
                         </div>
 
-                        <form method="post" asp-page-handler="Update" asp-route-id="@game.id" class="mt-2">
+                        <form method="post" asp-page-handler="Update" asp-route-id="@game.Id" class="mt-2">
 
-                            @if (@game.is_favorate_game == true)
+                            @if (@game.IsFavoriteGame == true)
                             {
                                 <button type="submit" class="btn btn-warning btn-sm w-100">
                                     ★ Favorited
@@ -50,7 +50,7 @@
 
                         </form>
 
-                        <form method="post" asp-page-handler="Delete" asp-route-id="@game.id" class="mt-3">
+                        <form method="post" asp-page-handler="Delete" asp-route-id="@game.Id" class="mt-3">
                             <button type="submit" class="btn btn-danger btn-sm w-100" onclick="return confirm('Remove from your library?');">
                                 Delete Record
                             </button>

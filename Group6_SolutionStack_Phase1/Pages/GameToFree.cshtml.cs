@@ -2,13 +2,21 @@ using System;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Group6_SolutionStack_Phase1.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SQLGameDatabase;
 
 namespace Group6_SolutionStack_Phase1.Pages
 {
     public class GameToFreeModel : PageModel
     {
+        private readonly GameDAL _dal;
+
+        public GameToFreeModel()
+        {
+            _dal = new GameDAL();
+        }
         [BindProperty]
         public Game? CurrentGame { get; set; }
 
@@ -31,17 +39,24 @@ namespace Group6_SolutionStack_Phase1.Pages
 
             try
             {
-                var controller = new Group6_SolutionStack_Phase1.Controllers.LibraryController();
-                string jsonString = JsonSerializer.Serialize(CurrentGame);
-                using (JsonDocument doc = JsonDocument.Parse(jsonString))
-                {
-                    JsonElement rawJson = doc.RootElement.Clone();
-                    var response = controller.Save(rawJson);
-                    if (response is OkObjectResult || response is CreatedAtActionResult)
-                    {
-                        return RedirectToPage("/Library");
-                    }
-                }
+                //var controller = new Group6_SolutionStack_Phase1.Controllers.LibraryController();
+                //string jsonString = JsonSerializer.Serialize(CurrentGame);
+                //using (JsonDocument doc = JsonDocument.Parse(jsonString))
+                //{
+                //    JsonElement rawJson = doc.RootElement.Clone();
+                //    var response = controller.Save(rawJson);
+                //    if (response is OkObjectResult || response is CreatedAtActionResult)
+                //    {
+                //        return RedirectToPage("/Library");
+                //    }
+                //}
+
+                SavedGame savedGame =
+                    GameMapper.ConvertToSavedGame(CurrentGame);
+
+                _dal.SaveGame(savedGame);
+
+                return RedirectToPage("/Library");
             }
             catch (Exception ex)
             {

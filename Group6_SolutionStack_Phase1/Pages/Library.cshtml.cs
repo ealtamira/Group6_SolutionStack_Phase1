@@ -1,26 +1,31 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SQLGameDatabase;
 
 namespace Group6_SolutionStack_Phase1.Pages
 {
     public class LibraryModel : PageModel
     {
-        public List<Game> SavedLibrary { get; set; } = new List<Game>();
-
+        private readonly GameDAL _dal;
+        public List<SavedGame> SavedLibrary { get; set; } = new List<SavedGame>();
+        public LibraryModel()
+        {
+            _dal = new GameDAL();
+        }
         public void OnGet()
         {
-            SavedLibrary = SavedGameService.GetSavedGames();
+            SavedLibrary = _dal.GetSavedGames();
         }
 
         public IActionResult OnPostDelete(int id)
         {
-            SavedGameService.RemoveGame(id);
+            _dal.RemoveGame(id);
             return RedirectToPage("/Library");
         }
         public IActionResult OnPostUpdate(int id)
         {
-            SavedGameService.FavorateGame(id);
+            _dal.FavoriteGame(id);
             return RedirectToPage("/Library");
         }
     }
